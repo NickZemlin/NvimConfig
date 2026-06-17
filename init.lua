@@ -85,6 +85,7 @@ local plugins = {
 	-- Optional Extras
 	{ "https://github.com/windwp/nvim-autopairs", "nvim-autopairs" },
 	{ "https://github.com/karb94/neoscroll.nvim", "neoscroll.nvim" },
+	{ "https://github.com/yutkat/confirm-quit.nvim", "confirm-quit.nvim" },
 }
 
 -- Install and load plugins on first run

@@ -35,4 +35,5 @@ require("plugins.todo-comments")
 -- Load visual enhancements
 require("plugins.autopairs")
 require("plugins.neoscroll")
+require("plugins.confirm-quit")
 require("indentline")

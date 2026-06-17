@@ -39,6 +39,21 @@ do
     for key, func in pairs(keymaps) do
         vim.keymap.set({ 'n', 'v', 'x' }, key, func, { silent = true })
     end
+
+    -- Animate counted j/k motions (e.g. 30j, 15k). Plain j/k stay instant.
+    local function counted_motion(direction)
+        return function()
+            local count = vim.v.count
+            if count > 1 then
+                neoscroll.scroll(direction * count, { move_cursor = true, duration = 150 })
+            else
+                -- No (or count 1): perform the normal motion instantly.
+                vim.cmd('normal! ' .. (direction > 0 and 'j' or 'k'))
+            end
+        end
+    end
+    vim.keymap.set({ 'n', 'v', 'x' }, 'j', counted_motion(1), { silent = true })
+    vim.keymap.set({ 'n', 'v', 'x' }, 'k', counted_motion(-1), { silent = true })
 end
 
 -- Diagnostic keymaps
