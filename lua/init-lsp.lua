@@ -15,6 +15,17 @@ require("mason-lspconfig").setup({
     automatic_installation = true,
 })
 
+-- Auto-install formatters/tools via Mason (LSPs are handled above).
+-- gofmt and zigfmt ship with their respective toolchains, so they are not
+-- listed here.
+require("mason-tool-installer").setup({
+    ensure_installed = {
+        "prettier", -- json, jsonc, javascript, typescript
+        "stylua",   -- lua
+        "goimports", -- go
+    },
+})
+
 -- LSP progress indicator
 require('lsp-progress').setup()
 

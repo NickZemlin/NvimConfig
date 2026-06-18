@@ -64,6 +64,7 @@ local plugins = {
 	{ "https://github.com/neovim/nvim-lspconfig", "nvim-lspconfig" },
 	{ "https://github.com/williamboman/mason.nvim", "mason.nvim" },
 	{ "https://github.com/williamboman/mason-lspconfig.nvim", "mason-lspconfig.nvim" },
+	{ "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim", "mason-tool-installer.nvim" },
 
 	-- Completion
 	{ "https://github.com/L3MON4D3/LuaSnip", "LuaSnip" },

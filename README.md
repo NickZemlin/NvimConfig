@@ -38,9 +38,9 @@ auto-installed by Mason; the toolchain/formatter must be provided by you.
 
 | Language       | LSP (auto via Mason) | Toolchain / formatter you must install      |
 | -------------- | -------------------- | ------------------------------------------- |
-| Lua            | lua-language-server  | `stylua` (formatter)                        |
-| Go             | `gopls`              | Go toolchain (`gofmt`, `goimports`)         |
-| JS/TS / React  | `ts_ls`              | `node`/`npm`, `prettier` (formatter)        |
+| Lua            | lua-language-server  | `stylua` auto via Mason                      |
+| Go             | `gopls`              | Go toolchain (`gofmt`; `goimports` auto via Mason) |
+| JS/TS / React  | `ts_ls`              | `node`/`npm` (runs Mason's `prettier`)      |
 | CSS / Tailwind | `tailwindcss`        | `node`/`npm`                                |
 | Zig            | `zls`                | Zig toolchain (`zigfmt` ships with `zig`)   |
 | Swift          | `sourcekit`*         | Swift toolchain (`sourcekit-lsp`)           |
@@ -51,18 +51,19 @@ LSP simply does not attach (no error).
 
 ## Formatters
 
-Configured in `lua/plugins/conform.lua`. These are **not** installed by Mason
-and must be on `PATH`:
+Configured in `lua/plugins/conform.lua`. `prettier`, `stylua` and `goimports`
+are **auto-installed via Mason** (`mason-tool-installer`, see `init-lsp.lua`).
+`gofmt` and `zigfmt` ship with their respective toolchains.
 
-- `stylua` — Lua
-- `gofmt`, `goimports` — Go
-- `prettier` — JavaScript, TypeScript
+- `stylua` — Lua (Mason)
+- `goimports` — Go (Mason), `gofmt` — Go (Go toolchain)
+- `prettier` — JavaScript, TypeScript, JSON, JSONC (Mason)
 - `zigfmt` — Zig (ships with the Zig toolchain)
 
 ## Notes
 
 - **macOS only:** `init.lua` appends `/opt/homebrew/bin` and `/usr/local/bin`
   to `PATH`. This is harmless on Linux (the directories are simply ignored).
-- **Auto-installed, no action needed:** all Neovim plugins (cloned via `git`)
-  and the Mason LSP servers listed above (`gopls`, `ts_ls`, `tailwindcss`,
-  `zls`).
+- **Auto-installed, no action needed:** all Neovim plugins (cloned via `git`),
+  the Mason LSP servers (`gopls`, `ts_ls`, `tailwindcss`, `zls`), and the Mason
+  formatters (`prettier`, `stylua`, `goimports`).

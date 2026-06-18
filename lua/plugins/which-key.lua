@@ -10,7 +10,7 @@ require('which-key').setup({
 
 -- Register leader-key group names so the popup shows readable section labels.
 require('which-key').add({
-    { '<leader>f', group = 'Find / Format' },
+    { '<leader>f', group = 'Find' },
     { '<leader>b', group = 'Buffer' },
     { '<leader>r', group = 'Rename' },
     { '<leader>c', group = 'Code' },

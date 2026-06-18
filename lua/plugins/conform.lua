@@ -9,6 +9,8 @@ require('conform').setup({
             go = true,
             javascript = true,
             typescript = true,
+            json = true,
+            jsonc = true,
             zig = true,
         }
         if enabled_filetypes[vim.bo[bufnr].filetype] then
@@ -23,6 +25,8 @@ require('conform').setup({
         go = { 'gofmt', 'goimports' },
         javascript = { 'prettier' },
         typescript = { 'prettier' },
+        json = { 'prettier' },
+        jsonc = { 'prettier' },
         zig = { 'zigfmt' },
     },
 })
