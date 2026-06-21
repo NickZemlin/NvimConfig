@@ -39,21 +39,6 @@ do
     for key, func in pairs(keymaps) do
         vim.keymap.set({ 'n', 'v', 'x' }, key, func, { silent = true })
     end
-
-    -- Animate counted j/k motions (e.g. 30j, 15k). Plain j/k stay instant.
-    local function counted_motion(direction)
-        return function()
-            local count = vim.v.count
-            if count > 1 then
-                neoscroll.scroll(direction * count, { move_cursor = true, duration = 150 })
-            else
-                -- No (or count 1): perform the normal motion instantly.
-                vim.cmd('normal! ' .. (direction > 0 and 'j' or 'k'))
-            end
-        end
-    end
-    vim.keymap.set({ 'n', 'v', 'x' }, 'j', counted_motion(1), { silent = true })
-    vim.keymap.set({ 'n', 'v', 'x' }, 'k', counted_motion(-1), { silent = true })
 end
 
 -- Diagnostic keymaps
@@ -87,6 +72,17 @@ vim.keymap.set('n', '<leader>v', '<cmd>Neotree toggle<CR>', { desc = 'Toggle fil
 -- ===========================================================================
 
 vim.keymap.set('n', '<leader>t', '<cmd>ToggleTerm<CR>', { desc = 'Toggle terminal' })
+
+-- ===========================================================================
+-- Neominimap (code minimap)
+-- ===========================================================================
+
+vim.keymap.set('n', '<leader>nm', '<cmd>Neominimap Toggle<CR>', { desc = 'Toggle minimap (global)' })
+vim.keymap.set('n', '<leader>no', '<cmd>Neominimap Enable<CR>', { desc = 'Enable minimap (global)' })
+vim.keymap.set('n', '<leader>nc', '<cmd>Neominimap Disable<CR>', { desc = 'Disable minimap (global)' })
+vim.keymap.set('n', '<leader>nr', '<cmd>Neominimap Refresh<CR>', { desc = 'Refresh minimap' })
+vim.keymap.set('n', '<leader>nb', '<cmd>Neominimap BufToggle<CR>', { desc = 'Toggle minimap (buffer)' })
+vim.keymap.set('n', '<leader>ns', '<cmd>Neominimap ToggleFocus<CR>', { desc = 'Toggle minimap focus' })
 
 -- ===========================================================================
 -- Telescope (fuzzy finder)

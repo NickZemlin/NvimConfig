@@ -9,9 +9,10 @@ require("plugins.which-key")
 
 -- Load UI plugins
 require("plugins.lualine")
-require("plugins.material") -- Load colorscheme after lualine (see material.nvim README)
+require("plugins.tokyonight") -- Load colorscheme after lualine
 require("plugins.bufferline")
 require("plugins.alpha-nvim")
+require("plugins.neominimap")
 
 -- Load navigation plugins
 require("plugins.neo-tree")

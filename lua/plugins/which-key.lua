@@ -12,6 +12,7 @@ require('which-key').setup({
 require('which-key').add({
     { '<leader>f', group = 'Find' },
     { '<leader>b', group = 'Buffer' },
+    { '<leader>n', group = 'Minimap' },
     { '<leader>r', group = 'Rename' },
     { '<leader>c', group = 'Code' },
     { '<leader>d', group = 'Document' },

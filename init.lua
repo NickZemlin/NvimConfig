@@ -48,11 +48,12 @@ local plugins = {
 	-- UI/Appearance
 	{ "https://github.com/nvim-mini/mini.nvim", "mini.nvim" },
 	{ "https://github.com/nvim-tree/nvim-web-devicons", "nvim-web-devicons" },
-	{ "https://github.com/marko-cerovac/material.nvim", "material.nvim" },
+	{ "https://github.com/folke/tokyonight.nvim", "tokyonight.nvim" },
 	{ "https://github.com/nvim-lualine/lualine.nvim", "lualine.nvim" },
 	{ "https://github.com/akinsho/bufferline.nvim", "bufferline.nvim" },
 	{ "https://github.com/goolord/alpha-nvim", "alpha-nvim" },
 	{ "https://github.com/folke/which-key.nvim", "which-key.nvim" },
+	{ "https://github.com/Isrothy/neominimap.nvim", "neominimap.nvim" },
 
 	-- Navigation
 	{ "https://github.com/nvim-neo-tree/neo-tree.nvim", "neo-tree.nvim" },

@@ -30,6 +30,8 @@ LSP/Mason runtime).
 
 > `init.lua` sets `vim.g.have_nerd_font = true`. A Nerd Font must be installed
 > and selected in your terminal, otherwise icons/separators render as boxes.
+> The minimap (neominimap.nvim) also needs a font that supports the **Braille
+> Patterns** Unicode block — most Nerd Fonts include this.
 
 ## Language Toolchains
 

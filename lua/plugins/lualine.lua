@@ -4,7 +4,7 @@
 require("lualine").setup({
     options = {
         icons_enabled = vim.g.have_nerd_font,
-        theme = 'material',
+        theme = 'tokyonight',
         -- Rounded separators (Nerd Font "powerline extra" glyphs).
         component_separators = vim.g.have_nerd_font
             and { left = vim.fn.nr2char(0xe0b5), right = vim.fn.nr2char(0xe0b7) }

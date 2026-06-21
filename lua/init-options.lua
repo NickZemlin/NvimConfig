@@ -42,6 +42,9 @@ vim.opt.inccommand = 'split'
 -- Confirm saves
 vim.opt.confirm = true
 
+-- Disable line wrapping (long lines extend off-screen instead of wrapping)
+vim.opt.wrap = false
+
 -- Diagnostic configuration
 vim.diagnostic.config({
     signs = {

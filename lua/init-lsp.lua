@@ -8,9 +8,11 @@ require("mason-lspconfig").setup({
     -- must be provided by the system Swift toolchain).
     ensure_installed = {
         "gopls",
+        "lua_ls",
         "ts_ls",
         "tailwindcss",
         "zls",
+        "buf_ls",
     },
     automatic_installation = true,
 })
