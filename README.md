@@ -26,6 +26,7 @@ LSP/Mason runtime).
 | `unzip`           | Mason unpacking downloaded LSP servers                          | `apt install unzip`                   |
 | `node` + `npm`    | `tree-sitter` CLI, `ts_ls`, `tailwindcss`, `prettier`           | distro package or `nvm`               |
 | `tree-sitter` CLI | Compiling Treesitter parsers from source                        | `npm install -g tree-sitter-cli`      |
+| `ripgrep` >= 14   | Telescope, TODO search, and project-wide find and replace       | `brew install ripgrep` / `apt install ripgrep` |
 | A **Nerd Font**   | Icons, statusline separators, diagnostic glyphs                 | https://www.nerdfonts.com             |
 
 > `init.lua` sets `vim.g.have_nerd_font = true`. A Nerd Font must be installed
@@ -51,6 +52,57 @@ auto-installed by Mason; the toolchain/formatter must be provided by you.
 Linux it requires a separately installed Swift toolchain. If absent, the Swift
 LSP simply does not attach (no error).
 
+## Xcode / Swift On macOS
+
+`xcodebuild.nvim` is installed and loaded only on macOS (`Darwin`). Linux
+machines skip the plugin entirely, so this config does not require Xcode,
+`xcodebuild`, or `xcode-build-server` outside macOS.
+
+For Xcode projects, SourceKit needs build settings from the actual Xcode target.
+Prefer a project-local `buildServer.json` generated for the active scheme, and
+keep it at the same root that SourceKit detects for Swift files.
+
+xcodebuild.nvim's xcode-build-server integration is enabled on macOS. The local
+config overrides the plugin's hardcoded `xcode-build-server` invocation so it
+runs through `/usr/bin/python3 /opt/homebrew/bin/xcode-build-server`, then
+normalizes generated `buildServer.json` files to use the same `argv`. This avoids
+the Homebrew Python `plistlib`/`pyexpat` issue seen with `#!/usr/bin/env python3`.
+
+If `buildServer.json` is deleted, run `:XcodebuildUpdateBuildServer` from the
+project session to recreate it from the current xcodebuild.nvim settings.
+
+Useful external tools on macOS:
+
+- Xcode, including `xcrun sourcekit-lsp` and `xcodebuild`
+- `xcode-build-server` for BSP-backed SourceKit settings
+- `xcbeautify` if you want prettier build logs from xcodebuild.nvim
+
+Current xcodebuild.nvim mappings use `<leader>xc` followed by one key:
+
+| Key | Action |
+| --- | ------ |
+| `<leader>xca` | Xcodebuild action picker |
+| `<leader>xcm` | Project manager |
+| `<leader>xcu` | Regenerate `buildServer.json` |
+| `<leader>xcS` | Regenerate `buildServer.json` (alias) |
+| `<leader>xcb` | Build |
+| `<leader>xcB` | Build for testing |
+| `<leader>xcr` | Build and run |
+| `<leader>xct` | Test; in visual mode, test selected |
+| `<leader>xcT` | Test current class |
+| `<leader>xc.` | Repeat last test |
+| `<leader>xcl` | Toggle build logs |
+| `<leader>xcc` | Toggle code coverage |
+| `<leader>xcC` | Show code coverage report |
+| `<leader>xce` | Toggle test explorer |
+| `<leader>xcs` | Show failing snapshots |
+| `<leader>xcp` | Generate and show preview |
+| `<leader>xcP` | Toggle preview |
+| `<leader>xcd` | Select device |
+| `<leader>xcq` | Open quickfix list |
+| `<leader>xcx` | Quickfix current line |
+| `<leader>xcA` | Xcodebuild code actions |
+
 ## Formatters
 
 Configured in `lua/plugins/conform.lua`. `prettier`, `stylua` and `goimports`
@@ -62,10 +114,21 @@ are **auto-installed via Mason** (`mason-tool-installer`, see `init-lsp.lua`).
 - `prettier` — JavaScript, TypeScript, JSON, JSONC (Mason)
 - `zigfmt` — Zig (ships with the Zig toolchain)
 
+## Find And Replace
+
+`grug-far.nvim` provides project-wide search and replacement through `ripgrep`.
+Use `<leader>fr` in normal mode to open it, or in visual mode to prefill the
+search field with the selected text. Use `<leader>fc` to limit search and
+replacement to the current buffer. Its buffer-local actions use `<localleader>`
+(Space in this configuration); press `g?` in the grug-far buffer to show the
+available actions.
+
 ## Notes
 
 - **macOS only:** `init.lua` appends `/opt/homebrew/bin` and `/usr/local/bin`
   to `PATH`. This is harmless on Linux (the directories are simply ignored).
+- **macOS only:** `xcodebuild.nvim` is cloned and required only when
+  `vim.uv.os_uname().sysname == "Darwin"`.
 - **Auto-installed, no action needed:** all Neovim plugins (cloned via `git`),
   the Mason LSP servers (`gopls`, `ts_ls`, `tailwindcss`, `zls`), and the Mason
   formatters (`prettier`, `stylua`, `goimports`).

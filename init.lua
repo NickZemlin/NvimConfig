@@ -18,6 +18,8 @@ vim.opt.packpath:prepend(pack_path)
 -- Ensure tree-sitter CLI is accessible for parsers compilation
 vim.env.PATH = vim.env.PATH .. ":/opt/homebrew/bin:/usr/local/bin"
 
+local is_macos = vim.uv.os_uname().sysname == "Darwin"
+
 -- Helper function to install plugins using git
 local function install_plugin(repo, name)
 	local install_path = pack_path .. "/pack/plugins/start/" .. name
@@ -78,6 +80,7 @@ local plugins = {
 	-- Development Tools
 	{ "https://github.com/akinsho/toggleterm.nvim", "toggleterm.nvim" },
 	{ "https://github.com/lewis6991/gitsigns.nvim", "gitsigns.nvim" },
+	{ "https://github.com/MagicDuck/grug-far.nvim", "grug-far.nvim" },
 
 	-- Quality Tools
 	{ "https://github.com/stevearc/conform.nvim", "conform.nvim" },
@@ -89,6 +92,10 @@ local plugins = {
 	{ "https://github.com/karb94/neoscroll.nvim", "neoscroll.nvim" },
 	{ "https://github.com/yutkat/confirm-quit.nvim", "confirm-quit.nvim" },
 }
+
+if is_macos then
+	table.insert(plugins, { "https://github.com/wojciech-kulik/xcodebuild.nvim", "xcodebuild.nvim" })
+end
 
 -- Install and load plugins on first run
 for _, plugin in ipairs(plugins) do

@@ -97,6 +97,22 @@ vim.keymap.set('n', '<leader>fh', function() require('telescope.builtin').help_t
 vim.keymap.set('n', '<C-p>', function() require('telescope.builtin').find_files() end, { desc = 'Quick Open (find files)' })
 
 -- ===========================================================================
+-- Grug Far (find and replace)
+-- ===========================================================================
+
+vim.keymap.set('n', '<leader>fr', function()
+    require('grug-far').open()
+end, { desc = 'Find and Replace' })
+
+vim.keymap.set('n', '<leader>fc', function()
+    require('grug-far').open({ prefills = { paths = vim.fn.expand('%') } })
+end, { desc = 'Find and Replace Current Buffer' })
+
+vim.keymap.set('x', '<leader>fr', function()
+    require('grug-far').with_visual_selection()
+end, { desc = 'Find and Replace Selection' })
+
+-- ===========================================================================
 -- Conform (formatting)
 -- ===========================================================================
 

@@ -27,6 +27,10 @@ require("plugins.nvim-cmp")
 -- Load development tools
 require("plugins.toggleterm")
 require("plugins.gitsigns")
+require("plugins.grug-far")
+if vim.uv.os_uname().sysname == "Darwin" then
+    require("plugins.xcodebuild")
+end
 
 -- Load code quality tools
 require("plugins.conform")

@@ -42,4 +42,46 @@ for _, file in ipairs(vim.fn.readdir(dir_path, [[v:val =~ '\.lua$']])) do
     require("plugins.lsps." .. file:gsub("%.lua$", ""))
 end
 
+vim.api.nvim_create_user_command("LspRestart", function(opts)
+    local names = {}
+
+    if opts.args ~= "" then
+        names[opts.args] = true
+    else
+        for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+            names[client.name] = true
+        end
+    end
+
+    if vim.tbl_isempty(names) then
+        vim.notify("No LSP clients to restart", vim.log.levels.WARN)
+        return
+    end
+
+    for name in pairs(names) do
+        vim.lsp.enable(name, false)
+    end
+
+    for _, client in ipairs(vim.lsp.get_clients()) do
+        if names[client.name] then
+            client:stop(true)
+        end
+    end
+
+    vim.defer_fn(function()
+        for name in pairs(names) do
+            vim.lsp.enable(name, true)
+        end
+    end, 500)
+end, {
+    nargs = "?",
+    complete = function()
+        local names = {}
+        for _, client in ipairs(vim.lsp.get_clients()) do
+            names[client.name] = true
+        end
+        return vim.tbl_keys(names)
+    end,
+})
+
 -- LSP keymaps (buffer-local, attached on LspAttach) live in lua/init-keymap.lua
