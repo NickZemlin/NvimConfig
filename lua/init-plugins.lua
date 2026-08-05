@@ -20,6 +20,7 @@ require("plugins.telescope")
 
 -- Load code intelligence plugins
 require("plugins.nvim-treesitter")
+require("plugins.markview")
 
 -- Load completion
 require("plugins.nvim-cmp")

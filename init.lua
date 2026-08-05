@@ -64,6 +64,7 @@ local plugins = {
 
 	-- Code Intelligence
 	{ "https://github.com/nvim-treesitter/nvim-treesitter", "nvim-treesitter" },
+	{ "https://github.com/OXY2DEV/markview.nvim", "markview.nvim" },
 	{ "https://github.com/neovim/nvim-lspconfig", "nvim-lspconfig" },
 	{ "https://github.com/williamboman/mason.nvim", "mason.nvim" },
 	{ "https://github.com/williamboman/mason-lspconfig.nvim", "mason-lspconfig.nvim" },
